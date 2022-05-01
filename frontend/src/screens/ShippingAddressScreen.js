@@ -12,7 +12,6 @@ export default function ShippingAddressScreen(props) {
     console.log("SHIPPING ADDRESS::::", shippingAddress);
     console.log("SHIPPING ADDRESS NAME::::", shippingAddress.fullName);
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
     const navigation = useRef(useNavigate());
     useEffect(() => {
         if (!userInfo) {
