@@ -28,6 +28,7 @@ app.get('/api/config/paypal', (req, res) => {
     // console.log("PENV::::", process.env.PAYPAL_CLIENT_ID);
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
+
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 app.use(express.static(path.join(__dirname, '/frontend/build')));
@@ -41,7 +42,6 @@ app.get('*', (req, res) =>
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
 });
-
 app.listen(port, () => {
     console.log(`Serve at http://localhost:${port}`);
 });
