@@ -27,7 +27,7 @@ export default function SigninScreen() {
             navigation.current(redirect);
         }
     }, [userInfo, navigation, redirect])
-    console.log("REDIRECT::::", redirect);
+    console.log("REDIRECTsignin::::", redirect);
 
     return (
         <div>

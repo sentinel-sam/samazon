@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct, listProducts, deleteProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
@@ -7,12 +7,19 @@ import MessageBox from '../components/MessageBox';
 import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET, } from '../constants/productConstants';
 
 export default function ProductListScreen(props) {
+    // const sellerMode = props.match.path.indexOf('/seller') >= 0;
+    const location = useLocation();
+    const sellerMode = location.pathname.indexOf('/seller') >= 0;
+    console.log("SELLERMODE:::::", sellerMode, location);
+
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
     const productCreate = useSelector((state) => state.productCreate);
     const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct } = productCreate;
     const productDelete = useSelector((state) => state.productDelete);
     const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete;
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
 
     // const navigate = useNavigate();
     const navigation = useRef(useNavigate());
@@ -27,8 +34,8 @@ export default function ProductListScreen(props) {
         if (successDelete) {
             dispatch({ type: PRODUCT_DELETE_RESET });
         }
-        dispatch(listProducts());
-    }, [createdProduct, dispatch, successCreate, successDelete, navigation]);
+        dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' }));
+    }, [createdProduct, dispatch, navigation, sellerMode, successCreate, successDelete, userInfo._id]);
 
     const createHandler = () => {
         dispatch(createProduct());

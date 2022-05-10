@@ -9,8 +9,7 @@ import axios from 'axios';
 
 export default function ProductEditScreen(props) {
     // const productId = props.match.params.id;
-    const { id } = useParams();
-    const productId = id;
+    const productId = useParams().id;
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [image, setImage] = useState('');

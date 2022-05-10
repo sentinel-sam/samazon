@@ -53,7 +53,7 @@ export default function OrderScreen() {
                 }
             }
         }
-    }, [dispatch, order, orderId, successPay, successDeliver]); // sdkReady puHGDBzxe@66N6(
+    }, [dispatch, orderId, successPay, successDeliver, order]); // sdkReady puHGDBzxe@66N6(
 
     // const successPaymentHandler = (paymentResult) => {
     //     // dispatch(payOrder(order, paymentResult));
@@ -216,6 +216,7 @@ export default function OrderScreen() {
                                     </>
                                 </li>)
                             }
+                            {/* userInfo.sellerof that product */}
                             {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                                 <li>
                                     {loadingDeliver && <LoadingBox></LoadingBox>}
